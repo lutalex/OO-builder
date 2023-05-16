@@ -11,7 +11,7 @@ ONLYOFFICE Server is installed and running.
 3. In the root directory of this project run `docker build -t docservice-builder .` to build docker image needed for later steps.
 4. Run docker container based on image built on the previous step providing `HASH_SDKJS`, `HASH_WEB_APPS`, `HASH_SERVER`, `BUILD_VERSION`, `BUILD_NUMBER` and `CONNECTIONS` env variables, as well as mounting `/out` volume to host directory of your choice &ndash; `docservice` file and `app.js` files for editors will appear there after docker container completes. `BUILD_VERSION` and `BUILD_NUMBER` should be the same as build version and build number of `DocumentServer` you are running. For example:
 ```
-$ docker run --rm --memory 8g \
+$ docker run --rm \
 -e HASH_SDKJS=0ab8241 \
 -e HASH_WEB_APPS=264a216 \
 -e HASH_SERVER=bce1a81 \

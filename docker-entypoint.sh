@@ -17,7 +17,7 @@ checkAndPrintVariable "BUILD_NUMBER"
 checkAndPrintVariable "BUILD_DATE"
 checkAndPrintVariable "CONNECTIONS"
 
-printf "\nSetting PRODUCT_VERSION env equal to BUILD_VERSION = $BUILD_VERSION\n"
+printf "\nSetting PRODUCT_VERSION env variable to be equal to BUILD_VERSION: $BUILD_VERSION\n"
 export PRODUCT_VERSION=$BUILD_VERSION
 
 printf "\n\n\n################################\n"
