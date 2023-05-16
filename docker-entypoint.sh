@@ -15,10 +15,15 @@ checkAndPrintVariable "HASH_SERVER"
 checkAndPrintVariable "BUILD_VERSION"
 checkAndPrintVariable "BUILD_NUMBER"
 checkAndPrintVariable "BUILD_DATE"
-checkAndPrintVariable "PRODUCT_VERSION"
 checkAndPrintVariable "CONNECTIONS"
 
-printf "\nBuilding server...\n"
+printf "\nSetting PRODUCT_VERSION env equal to BUILD_VERSION = $BUILD_VERSION\n"
+export PRODUCT_VERSION=$BUILD_VERSION
+
+printf "\n\n\n################################\n"
+printf "Building server..."
+printf "\n################################\n"
+
 printf "\nCloning repo...\n"
 git clone https://github.com/ONLYOFFICE/server.git oo-server
 cd oo-server || exit 1
@@ -47,21 +52,19 @@ cd DocService || exit 1
 cp docservice /out/docservice
 cd ../../../..
 
-printf "\nBuilding sdkjs...\n"
-printf "\nCloning repo...\n"
-git clone https://github.com/ONLYOFFICE/sdkjs.git oo-sdkjs
-cd oo-sdkjs || exit 1
+printf "\n\n\n################################\n"
+printf "Cloning sdkjs..."
+printf "\n################################\n\n"
+
+git clone https://github.com/ONLYOFFICE/sdkjs.git sdkjs
+cd sdkjs || exit 1
 git checkout "$HASH_SDKJS"
+cd ..
 
-printf "\nBuilding...\n"
-cd build || exit 1
-npm install -g grunt-cli
-npm install
-grunt --force
-cp -r ../deploy/sdkjs /
-cd ../..
+printf "\n\n\n################################\n"
+printf "Building web-apps..."
+printf "\n################################\n"
 
-printf "\nBuilding web-apps...\n"
 printf "\nCloning repo...\n"
 git clone https://github.com/ONLYOFFICE/web-apps.git oo-web-apps
 cd oo-web-apps || exit 1
@@ -88,4 +91,4 @@ cp -r /oo-web-apps/deploy/web-apps/apps/documenteditor/mobile/dist/js/app.js /ou
 cp -r /oo-web-apps/deploy/web-apps/apps/presentationeditor/mobile/dist/js/app.js /out/presentationeditor/
 cp -r /oo-web-apps/deploy/web-apps/apps/spreadsheeteditor/mobile/dist/js/app.js /out/spreadsheeteditor/
 
-printf "\nDone, docservice may be found at /out/docservice; mobile apps at /out/documenteditor, /out/presentationeditor, /out/spreadsheeteditor.\n"
+printf "\n\n\nDone, docservice may be found at /out/docservice; mobile apps at /out/documenteditor, /out/presentationeditor, /out/spreadsheeteditor.\n"
